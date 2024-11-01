@@ -26,7 +26,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 ## 📥 Inicializar o Projeto
 
 Execute o arquivo
-<a href='https://github.com/drypzz/taskSystem/blob/master/run.bat'>
+<a href='https://github.com/drypzz/test-fattocs/blob/master/run.bat'>
   run.bat
 </a>
 <br />
