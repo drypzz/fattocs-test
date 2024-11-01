@@ -19,17 +19,41 @@ const HomeRules = () => {
     e.preventDefault();
   };
 
+  const moveTaskUp = (index: number) => {
+    if (index > 0) {
+      updateTaskOrder(index, index - 1);
+    }
+  };
+  
+  const moveTaskDown = (index: number) => {
+    if (index < tasks.length - 1) {
+      updateTaskOrder(index, index + 1);
+    }
+  };
+  
   const updateTaskOrder = (fromIndex: number, toIndex: number) => {
     const updatedTasks = [...tasks];
     const [movedTask] = updatedTasks.splice(fromIndex, 1);
     updatedTasks.splice(toIndex, 0, movedTask);
-
+  
     setTasks(updatedTasks.map((task, index) => ({ ...task, order: index + 1 })));
-
+  
     updatedTasks.forEach(async (task, index) => {
       await axios.put(`http://localhost:5000/tasks/${task.id}`, { ...task, order: index + 1 });
     });
   };
+
+  // const updateTaskOrder = (fromIndex: number, toIndex: number) => {
+  //   const updatedTasks = [...tasks];
+  //   const [movedTask] = updatedTasks.splice(fromIndex, 1);
+  //   updatedTasks.splice(toIndex, 0, movedTask);
+
+  //   setTasks(updatedTasks.map((task, index) => ({ ...task, order: index + 1 })));
+
+  //   updatedTasks.forEach(async (task, index) => {
+  //     await axios.put(`http://localhost:5000/tasks/${task.id}`, { ...task, order: index + 1 });
+  //   });
+  // };
 
   const handleDrop = (index: number) => {
     if (draggedTaskIndex !== null && draggedTaskIndex !== index) {
@@ -37,6 +61,8 @@ const HomeRules = () => {
     }
     setDraggedTaskIndex(null);
   };
+
+
 
   const deleteTask = async (id: number) => {
     if (confirm("Deseja realmente excluir esta tarefa?")) {
@@ -80,7 +106,10 @@ const HomeRules = () => {
         const orderedTasks = response.data.sort((a, b) => a.order - b.order);
         setTasks(orderedTasks);
       })
-      .catch(error => console.error("Failed to fetch tasks:", error));
+      .catch(error => {
+        console.error("Failed to fetch tasks:", error)
+        setTasks([]);
+      });
   }, [tasks]);
 
   return {
@@ -95,6 +124,8 @@ const HomeRules = () => {
     handleDragStart,
     handleDragOver,
     handleDrop,
+    moveTaskUp,
+    moveTaskDown
   };
 };
 

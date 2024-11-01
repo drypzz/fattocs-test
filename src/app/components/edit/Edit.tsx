@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 
@@ -16,25 +16,25 @@ const EditTask = ({ task, onSave, onCancel }: EditTaskProps) => {
         <h2>Editar Tarefa (#{task.order})</h2>
         <form onSubmit={updateTask}>
           <input
-            type="text"
+            type='text'
             value={name}
             onChange={e => setName(e.target.value)}
             required
           />
           <input
-            type="number"
+            type='number'
             value={cost || ''}
             onChange={e => setCost(parseFloat(e.target.value))}
             required
           />
           <input
-            type="date"
+            type='date'
             value={deadline}
             onChange={e => setDeadline(e.target.value)}
             required
           />
-          <button type="submit">Atualizar</button>
-          <button type="button" onClick={onCancel}>Cancelar</button>
+          <button type='submit'>Atualizar</button>
+          <button type='button' onClick={onCancel}>Cancelar</button>
         </form>
       </div>
     </>

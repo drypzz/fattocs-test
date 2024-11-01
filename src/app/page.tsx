@@ -1,13 +1,14 @@
 'use client';
 
-import React from 'react';
 import AddTask from './components/add/Add';
 import EditTask from './components/edit/Edit';
+
 import HomeRules from './page.rules';
 
 import './page.style.css';
 
 const HomePage = () => {
+
   const {
     tasks,
     isEditMode,
@@ -19,14 +20,20 @@ const HomePage = () => {
     formatTexts,
     handleDragStart,
     handleDragOver,
-    handleDrop
+    handleDrop,
+    moveTaskUp,
+    moveTaskDown
   } = HomeRules();
 
   return (
     <>
       <section>
-        <h1 className='title'>Lista de Tarefas</h1>
+        <div className='container'>
+          <img className='logo' src='/logo.png' alt='Logo da Fattocs' />
+          <h1>Sistema de Tarefas</h1>
+        </div>
         <AddTask />
+        <h1 className='title'>Lista de Tarefas</h1>
         <div
           className='list'>
           {tasks.length === 0 && (
@@ -50,7 +57,7 @@ const HomePage = () => {
               onDrop={() => handleDrop(i)}
             >
               <div>
-                <p className='order'>#{task.order}</p>
+                <p className='order'>#{task.order} - [ID: {task.id}]</p>
               </div>
               <div>
                 <h2>{task.name}</h2>
@@ -63,6 +70,7 @@ const HomePage = () => {
               </div>
               <div className='buttons'>
                 <button
+                  className='button-list'
                   onClick={() => { setIsEditMode(true); setEditTaskData(task); }}
                   style={{
                     backgroundColor: (task.cost >= 1000 ? 'white' : '#680707'),
@@ -71,12 +79,34 @@ const HomePage = () => {
                 >✏️
                 </button>
                 <button
+                  className='button-list'
                   onClick={() => deleteTask(task.id)}
                   style={{
                     backgroundColor: (task.cost >= 1000 ? 'white' : '#680707'),
                     color: (task.cost >= 1000 ? 'white' : 'black'),
                   }}
                 >🗑️</button>
+              </div>
+              <div className="mobile-buttons">
+                {i > 0 && (
+                  <button
+                  onClick={() => moveTaskUp(i)}
+                  style={{
+                    backgroundColor: (task.cost >= 1000 ? 'white' : '#680707'),
+                    color: (task.cost >= 1000 ? 'black' : 'white'),
+                  }}
+                  >🔼 Subir</button>
+                )}
+                {i < tasks.length - 1 && (
+                  <button
+                  style={{
+                    backgroundColor: (task.cost >= 1000 ? 'white' : '#680707'),
+                    color: (task.cost >= 1000 ? 'black' : 'white'),
+                  }}
+                  onClick={() => moveTaskDown(i)}
+                  >🔽 Descer
+                  </button>
+                )}
               </div>
             </div>
           ))}
