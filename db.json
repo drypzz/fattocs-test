@@ -1,3 +1,32 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "48e9",
+      "name": "Design e implementação da interface de login do sistema",
+      "cost": 1200,
+      "deadline": "2024-11-10",
+      "order": 3
+    },
+    {
+      "id": "c311",
+      "name": "Desenvolvimento do sistema de consulta avançada de veículos",
+      "cost": 2500,
+      "deadline": "2024-11-25",
+      "order": 1
+    },
+    {
+      "id": "d02c",
+      "name": "Integração de API para gerenciamento de inventário",
+      "cost": 1800,
+      "deadline": "2024-12-05",
+      "order": 2
+    },
+    {
+      "id": "e9b4",
+      "name": "Implementação de relatórios de custos e margens para cada serviço",
+      "cost": 500,
+      "deadline": "2024-12-15",
+      "order": 4
+    }
+  ]
 }

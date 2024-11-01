@@ -13,7 +13,7 @@ const EditTask = ({ task, onSave, onCancel }: EditTaskProps) => {
   return (
     <>
       <div>
-        <h2>Editar Tarefa (#{task.id})</h2>
+        <h2>Editar Tarefa (#{task.order})</h2>
         <form onSubmit={updateTask}>
           <input
             type="text"
