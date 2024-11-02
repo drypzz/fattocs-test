@@ -26,9 +26,9 @@ p.order {
     height: auto;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 0 10px #0000001a;
+    box-shadow: 0 0 10px var(--shadow-color-card);
     background-color: white;
-    border: 1px solid #00000033;
+    border: 1px solid var(--border-color-color);
     text-align: left;
     font-size: 0.9rem;
 }
@@ -39,6 +39,9 @@ p.order {
     align-items: center;
     margin-top: 10px;
     gap: 10px;
+    border-top: 1px solid var(--border-color-color);
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .button-list {
@@ -47,11 +50,12 @@ p.order {
     border: none;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 5px var(--shadow-color-card);
     cursor: pointer;
 }
 
 .button-list:hover {
-    opacity: 0.5;
+    transform: scale(1.1);
 }
 
 .mobile-buttons {
@@ -64,8 +68,9 @@ p.order {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #680707;
+    background-color: var(--primary-color);
     color: white;
+    box-shadow: 0 0 5px var(--shadow-color-card);
     transition: all 0.3s ease-in-out;
 }
 
@@ -86,5 +91,9 @@ p.order {
     .card {
         width: 100%;
         height: 100%;
+    }
+
+    .main{
+        width: 100%;
     }
 }

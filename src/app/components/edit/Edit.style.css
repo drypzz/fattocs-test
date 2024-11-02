@@ -1,0 +1,71 @@
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color-modal);
+    z-index: 1000;
+}
+
+.modal-content{
+    width: 500px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px var(--shadow-color-modal);
+}
+
+.modal-content h2{
+    margin-bottom: 20px;
+}
+
+.modal-content input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.buttons-modal{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons-modal button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.buttons-modal button.cancel{
+    background-color: red;
+    color: white;
+}
+
+.buttons-modal button.save{
+    background-color: green;
+    color: white;
+}
+
+.buttons-modal button:hover{
+    transform: scale(1.1);
+}
+
+
+
+@media screen and (max-width: 960px){
+    .modal-content{
+        width: 90%;
+    }
+}

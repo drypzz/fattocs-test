@@ -1,11 +1,11 @@
 'use client';
 
-import AddTask from './components/add/Add';
-import EditTask from './components/edit/Edit';
+import AddTask from './components/add/Add'; // Componente de adição de tarefas
+import EditTask from './components/edit/Edit'; // Componente de edição de tarefas
 
-import HomeRules from './page.rules';
+import HomeRules from './page.rules'; // Regras da página
 
-import './page.style.css';
+import './page.style.css'; // Estilo da página
 
 const HomePage = () => {
 
@@ -23,24 +23,36 @@ const HomePage = () => {
     handleDrop,
     moveTaskUp,
     moveTaskDown
-  } = HomeRules();
+  } = HomeRules(); // Regras da página
 
   return (
     <>
-      <section>
+      <section className='main'>
         <div className='container'>
           <img className='logo' src='/logo.png' alt='Logo da Fattocs' />
           <h1>Sistema de Tarefas</h1>
         </div>
+
+        {
+          // Exibe o formulário de adição de tarefas
+        }
         <AddTask />
+        
         <h1 className='title'>Lista de Tarefas</h1>
-        <div
-          className='list'>
+        <div className='list'>
+
+          {
+            // Verifica se há tarefas na lista e exibe as tarefas
+          }
           {tasks.length === 0 && (
             <div className='error'>
               <p>Nenhuma tarefa encontrada!</p>
             </div>
           )}
+
+          {
+            // Listagem das tarefas
+          }
           {tasks.map((task, i) => (
             <div
               key={task.id}
@@ -51,10 +63,10 @@ const HomePage = () => {
                 cursor: (tasks.length > 1 ? 'move' : 'default'),
                 border: (task.cost >= 1000 ? '1px solid #fff' : '1px solid #00000033'),
               }}
-              draggable={tasks.length > 1}
-              onDragStart={() => handleDragStart(i)}
-              onDragOver={handleDragOver}
-              onDrop={() => handleDrop(i)}
+              draggable={tasks.length > 1} // Permite arrastar a tarefa
+              onDragStart={() => handleDragStart(i)} // Inicia o arraste da tarefa
+              onDragOver={handleDragOver} // Permite a tarefa ser arrastada
+              onDrop={() => handleDrop(i)} // Finaliza o arraste da tarefa
             >
               <div>
                 <p className='order'>#{task.order} - [ID: {task.id}]</p>
@@ -68,34 +80,40 @@ const HomePage = () => {
               <div>
                 <p>- Data Limite: {formatTexts({ type: 'date', date: task.deadline })}</p>
               </div>
-              <div className='buttons'>
+              <div
+                style={{
+                  borderTop: (task.cost >= 1000 ? '1px solid #ffffff33' : '1px solid #00000033'),
+                }}
+                className='buttons'
+              >
                 <button
                   className='button-list'
-                  onClick={() => { setIsEditMode(true); setEditTaskData(task); }}
-                  style={{
-                    backgroundColor: (task.cost >= 1000 ? 'white' : '#680707'),
-                    color: (task.cost >= 1000 ? 'white' : 'black'),
-                  }}
-                >✏️
-                </button>
-                <button
-                  className='button-list'
-                  onClick={() => deleteTask(task.id)}
-                  style={{
-                    backgroundColor: (task.cost >= 1000 ? 'white' : '#680707'),
-                    color: (task.cost >= 1000 ? 'white' : 'black'),
-                  }}
-                >🗑️</button>
-              </div>
-              <div className="mobile-buttons">
-                {i > 0 && (
-                  <button
-                  onClick={() => moveTaskUp(i)}
+                  onClick={() => { setIsEditMode(true); setEditTaskData(task); }} // Edita a tarefa
                   style={{
                     backgroundColor: (task.cost >= 1000 ? 'white' : '#680707'),
                     color: (task.cost >= 1000 ? 'black' : 'white'),
                   }}
-                  >🔼 Subir</button>
+                >✏️ - Editar
+                </button>
+                <button
+                  className='button-list'
+                  onClick={() => deleteTask(task.id)} // Deleta a tarefa
+                  style={{
+                    backgroundColor: (task.cost >= 1000 ? 'white' : '#680707'),
+                    color: (task.cost >= 1000 ? 'black' : 'white'),
+                  }}
+                >🗑️ - Deletar
+                </button>
+              </div>
+              <div className="mobile-buttons">
+                {i > 0 && (
+                  <button
+                  onClick={() => moveTaskUp(i)} // Move a tarefa para cima
+                  style={{
+                    backgroundColor: (task.cost >= 1000 ? 'white' : '#680707'),
+                    color: (task.cost >= 1000 ? 'black' : 'white'),
+                  }}
+                  >🔼 - Subir</button>
                 )}
                 {i < tasks.length - 1 && (
                   <button
@@ -103,16 +121,20 @@ const HomePage = () => {
                     backgroundColor: (task.cost >= 1000 ? 'white' : '#680707'),
                     color: (task.cost >= 1000 ? 'black' : 'white'),
                   }}
-                  onClick={() => moveTaskDown(i)}
-                  >🔽 Descer
+                  onClick={() => moveTaskDown(i)} // Move a tarefa para baixo
+                  >🔽 - Descer
                   </button>
                 )}
               </div>
             </div>
           ))}
         </div>
+
+        {
+          // Verifica se está em modo de edição e exibe o formulário de edição
+        }
         {isEditMode && editTaskData && (
-          <EditTask task={editTaskData} onSave={handleEditTask} onCancel={() => { setIsEditMode(false); setEditTaskData(null); }} />
+          <EditTask task={editTaskData} onSave={handleEditTask} onCancel={() => { setIsEditMode(false); setEditTaskData(null); }} /> // Edita a tarefa
         )}
       </section>
     </>
