@@ -27,7 +27,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 ## 📥 Inicializar o Projeto
 
 - Primeiramente, precisa ter o <a href='https://nodejs.org/en/download/prebuilt-installer'>Node.js (Current)</a> baixado.
-- Logo ápos, execute o arquivo <a href='https://github.com/drypzz/test-fattocs/blob/master/run.bat'>run.bat</a>
+- Baixe ou clone o repositorio.
+- Utilize o comando `npm i` ou `npm install` no terminal para instalar todas as dependecias.
+- Logo ápos, execute o arquivo <a href='https://github.com/drypzz/test-fattocs/blob/master/run.bat'>run.bat</a>.
 - E pronto, o projeto vai começar a rodar.
 ---
 
