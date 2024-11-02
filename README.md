@@ -3,7 +3,7 @@
 ## 📰 Informações
 
 - Data de início: 30/10/24
-- Data de término: ...
+- Data de término: 02/11/24
 
 ---
 
@@ -20,6 +20,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 ## 💻 Projeto
 
 - Este projeto foi desenvolvido para fins educacionais
+- Projeto com estilização e estrutura simples
 
 ---
 
