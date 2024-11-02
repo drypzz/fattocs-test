@@ -4,4 +4,4 @@ export interface Task {
     cost: number;
     deadline: string;
     order: number;
-}
+} // Interface de tarefa

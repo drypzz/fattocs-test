@@ -1,17 +1,17 @@
 {
   "tasks": [
     {
-      "id": "c311",
-      "name": "Desenvolvimento do sistema de consulta avançada de veículos",
+      "id": "e82a",
+      "name": "Implementar tela de Login",
       "cost": 2500,
-      "deadline": "2024-11-25",
+      "deadline": "2024-11-30",
       "order": 1
     },
     {
-      "id": "e9b4",
-      "name": "Implementação de relatórios de custos e margens para cada serviço",
+      "id": "e63b",
+      "name": "Realizar manutenção",
       "cost": 500,
-      "deadline": "2024-12-15",
+      "deadline": "2024-12-31",
       "order": 2
     }
   ]

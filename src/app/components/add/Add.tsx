@@ -2,13 +2,13 @@
 
 import React from 'react';
 
-import AddRules from './Add.rules';
+import AddRules from './Add.rules'; // Importa as regras de negócio
 
-import './Add.style.css';
+import './Add.style.css'; // Importa o arquivo de estilos
 
 const AddTask = () => {
 
-  const { name, setName, cost, setCost, deadline, setDeadline, addTask } = AddRules();
+  const { name, setName, cost, setCost, deadline, setDeadline, addTask } = AddRules(); // Adiciona as regras de negócio
 
   return (
     <>

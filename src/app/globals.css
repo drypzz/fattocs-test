@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 :root{
@@ -13,6 +13,12 @@
 
   --background-color-error: #ff00001a;
   --border-color-error: #ff000080;
+
+  --border-color-color: #00000033;
+  --shadow-color-card: #0000001a;
+  
+  --background-color-modal: #000000cc;
+  --shadow-color-modal: #ffffff80;
 }
 
 html{
@@ -40,13 +46,13 @@ h1.title{
   font-size: 2rem;
   margin-top: 20px;
   font-weight: 400;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: grey;
   user-select: none;
 }
 
 h1.title::after{
-  content: "";
+  content: '';
   position: absolute;
   width: 100px;
   height: 2px;
@@ -58,7 +64,7 @@ h1.title::after{
 }
 
 h1.title::before{
-  content: "";
+  content: '';
   position: absolute;
   width: 100px;
   height: 2px;
@@ -66,6 +72,17 @@ h1.title::before{
   top: 25px;
   left: 70%;
   transform: translateX(-50%);
+}
+
+input[type = 'date']::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(50%);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 .error{
