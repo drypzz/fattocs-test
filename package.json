@@ -6,13 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "server": "json-server --watch db.json --port 5000"
+    "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.22.0",
     "axios": "^1.7.7",
-    "json-server": "^1.0.0-beta.3",
     "next": "15.0.2",
+    "prisma": "^5.22.0",
     "react": "^18",
     "react-dom": "^18"
   },

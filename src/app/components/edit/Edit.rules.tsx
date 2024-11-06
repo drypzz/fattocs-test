@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Task } from '@/app/types/Task'; // Importa o tipo de tarefa
 
-import axios from 'axios';
+import prisma from '@/lib/prisma'; // Importa a instância do Prisma
 
 import EditTaskProps from './Edit.props'; // Importa a interface de propriedades da edição
 
@@ -38,18 +38,30 @@ const EditRules = ({ task, onSave }: EditTaskProps) => {
         } // Verifica se a data limite é no futuro
 
         try {
-            const tasks = await axios.get<Task[]>('http://localhost:5000/tasks'); // Busca todas as tarefas
 
-            if (tasks.data.some(existingTask => existingTask.name === name && existingTask.id !== task.id)) {
+
+            const tasks = await prisma.task.findMany(); // Busca todas as tarefas
+
+            if (tasks.some(existingTask => existingTask.name === name && existingTask.id !== task.id)) {
                 alert("Nome de tarefa já existe!");
                 return;
             } // Verifica se já existe uma tarefa com o mesmo nome
 
             const updatedTask = { ...task, name, cost, deadline }; // Atualiza a tarefa com os novos valores
-            await axios.put(`http://localhost:5000/tasks/${task.id}`, updatedTask); // Atualiza a tarefa no servidor
-            onSave(updatedTask); // Chama a função de salvar
+            const response = await prisma.task.update({
+                where: { id: updatedTask.id },
+                data: updatedTask,
+            }).then((e) => {
+                console.log(e);
+                setName('');
+                setCost(0);
+                setDeadline('');
+                onSave(updatedTask);
+            }).catch((e) => {
+                console.log(e);
+            });
         } catch (error) {
-            console.error("Failed to edit task:", error);
+            console.log("Failed to edit task:", error);
         }
     };
 

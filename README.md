@@ -13,7 +13,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - TypeScript
 - Next.js
-- JSON Server (Backend)
+- Prisma (Backend)
 
 ---
 

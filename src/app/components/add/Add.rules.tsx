@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { Task } from '@/app/types/Task'; // Importa o tipo de tarefa
 
+import prisma from '@/lib/prisma'; // Importa a instância do Prisma
+
 import axios from 'axios';
 
 const AddRules = () => {
@@ -36,19 +38,23 @@ const AddRules = () => {
         } // Verifica se a data limite é no futuro
 
         try {
-            const tasks = await axios.get<Task[]>('http://localhost:5000/tasks'); // Busca todas as tarefas
-            const response = await axios.post('http://localhost:5000/tasks', {
-                name,
-                cost,
-                deadline,
-                order: (tasks.data.length + 1),
-            }); // Adiciona a tarefa no servidor
-            console.log("Task added:", response.data);
-            setName('');
-            setCost(0);
-            setDeadline('');
+            const response = await prisma.task.create({ // Adiciona a tarefa no banco de dados
+                data: {
+                    name,
+                    cost,
+                    deadline,
+                    order: (await prisma.task.count()) + 1, // Assuming order is based on the count of tasks
+                },
+            }).then((e) => {
+                console.log(e);
+                setName('');
+                setCost(0);
+                setDeadline('');
+            }).catch((e) => {
+                console.log(e);
+            });
         } catch (error) {
-            console.error("Failed to add task:", error);
+            console.log("Failed to add task:", error);
         }
     };
 
