@@ -1,9 +1,9 @@
-# Sistema Lista de Tarefas
+# Sistema Lista de Tarefas - Prisma
 
 ## 📰 Informações
 
-- Data de início: 30/10/24
-- Data de término: ...
+- Data de início: 06/11/24
+- Data de término: 06/11/24
 
 ---
 
@@ -19,18 +19,14 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-- Este projeto foi desenvolvido para fins educacionais
+- Projeto retrabalhado para ser acessado na web
 
 ---
 
-## 📥 Inicializar o Projeto
+## 🔗 Acessar o Projeto
 
-Execute o arquivo
-<a href='https://github.com/drypzz/test-fattocs/blob/master/run.bat'>
-  run.bat
-</a>
-<br />
-- E pronto, o projeto vai começar a rodar.
+Link: <a href='https://test-fattocs.vercel.app'>Clique aqui</a>
+
 ---
 
 Feito com ♥ by drypzz
