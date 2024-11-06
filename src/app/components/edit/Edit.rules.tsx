@@ -36,7 +36,6 @@ const EditRules = ({ task, onSave }: EditTaskProps) => {
         } // Verifica se a data limite é no futuro
 
         try {
-
             const tasks = await getTasksPrisma(); // Obtém as tarefas do banco de dados
 
             if (tasks.some(t => t.name === name && t.id !== task.id)) {
@@ -45,19 +44,14 @@ const EditRules = ({ task, onSave }: EditTaskProps) => {
             } // Verifica se já existe uma tarefa com o mesmo nome
 
             const updatedTask = { ...task, name, cost, deadline: new Date(deadline) }; // Atualiza a tarefa com os novos valores
-
-            const response = await updateTaskPrisma(task.id, updatedTask).then((e) => {
-                console.log(e);
-                setName('');
-                setCost(0);
-                setDeadline('');
-                onSave({...task, name, cost, deadline: new Date(deadline).toISOString()});
-            }).catch((e) => {
-                console.log(e);
-            });
-
+            await updateTaskPrisma(task.id, updatedTask)
+            onSave({...task, name, cost, deadline: new Date(deadline).toISOString()});
+            alert('Tarefa atualizada com sucesso');
+            setName('');
+            setCost(0);
+            setDeadline('');
         } catch (error) {
-            console.log("Failed to edit task:", error);
+            console.log('Failed to edit task:', error);
         }
     };
 

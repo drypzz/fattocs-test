@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { addTaskPrisma } from '@/lib/actions';
 
 const AddRules = () => {
-    
     const [name, setName] = useState(''); // Inicializa o estado com o nome da tarefa
     const [cost, setCost] = useState<number>(0); // Inicializa o estado com o custo da tarefa
     const [deadline, setDeadline] = useState(''); // Inicializa o estado com a data limite da tarefa
@@ -34,30 +33,13 @@ const AddRules = () => {
         } // Verifica se a data limite é no futuro
 
         try {
-            const response = await addTaskPrisma({ name, cost, deadline: new Date(deadline) });
-            console.log(response);
-
+            await addTaskPrisma({ name, cost, deadline: new Date(deadline) }); // Adiciona a tarefa
+            alert('Tarefa adicionada com sucesso!');
             setName('');
             setCost(0);
             setDeadline('');
-
-            // const response = await prisma.task.create({ // Adiciona a tarefa no banco de dados
-            //     data: {
-            //         name,
-            //         cost,
-            //         deadline,
-            //         order: (await prisma.task.count()) + 1, // Assuming order is based on the count of tasks
-            //     },
-            // }).then((e) => {
-            //     console.log(e);
-            //     setName('');
-            //     setCost(0);
-            //     setDeadline('');
-            // }).catch((e) => {
-            //     console.log(e);
-            // });
         } catch (error) {
-            console.log("Failed to add task:", error);
+            console.log('Failed to add task:', error);
         }
     };
 

@@ -1,4 +1,4 @@
-"use server";
+'use server';
 
 import { PrismaClient } from '@prisma/client';
 
@@ -22,7 +22,7 @@ const addTaskPrisma = async (taskData: { name: string, cost: number, deadline: D
 };
 
 // Editar tarefa
-const updateTaskPrisma = async (id: number, taskData: { name: string, cost: number, deadline: Date }) => {
+const updateTaskPrisma = async (id: number, taskData: { name?: string, cost?: number, deadline?: Date, order?: number }) => {
   const updatedTask = await prisma.task.update({
     where: { id },
     data: taskData,
