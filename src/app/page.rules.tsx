@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Task } from './types/Task';
 
-import prisma from '@/lib/prisma';
+// import prisma from '@/lib/prisma';
+
+import { updateTaskPrisma, getTasksPrisma, deleteTaskPrisma } from '@/lib/actions';
 
 const HomeRules = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -22,12 +24,18 @@ const HomeRules = () => {
 
     setTasks(updatedTasks.map((task, index) => ({ ...task, order: index + 1 })));
     
-    for (const task of updatedTasks) {
-      await prisma.task.update({
-        where: { id: task.id },
-        data: { order: task.order },
-      });
-    }
+    await updateTaskPrisma(movedTask.id, {
+      name: movedTask.name,
+      cost: movedTask.cost,
+      deadline: new Date(movedTask.deadline)
+    });
+
+    // for (const task of updatedTasks) {
+    //   await prisma.task.update({
+    //     where: { id: task.id },
+    //     data: { order: task.order },
+    //   });
+    // }
   };
 
   const handleDrop = (index: number) => {
@@ -39,16 +47,18 @@ const HomeRules = () => {
 
   const deleteTask = async (id: number) => {
     if (confirm('Deseja realmente excluir esta tarefa?')) {
-      await prisma.task.delete({ where: { id } });
+      await deleteTaskPrisma(id);
       setTasks(tasks.filter(task => task.id !== id));
     }
   };
 
   const handleEditTask = async (updatedTask: Task) => {
     try {
-      await prisma.task.update({
-        where: { id: updatedTask.id },
-        data: updatedTask,
+      
+      await updateTaskPrisma(updatedTask.id, {
+        name: updatedTask.name,
+        cost: updatedTask.cost,
+        deadline: new Date(updatedTask.deadline)
       });
       setTasks(tasks.map(task => (task.id === updatedTask.id ? updatedTask : task)));
       setIsEditMode(false);
@@ -77,10 +87,10 @@ const HomeRules = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const tasksFromDB = await prisma.task.findMany({
-          orderBy: { order: 'asc' },
-        });
-        setTasks(tasksFromDB.map(task => ({ ...task, deadline: task.deadline.toISOString() })));
+        const tasksFromDB = await getTasksPrisma();
+        const sortedTasks = tasksFromDB.sort((a, b) => a.order - b.order);
+        const tasksDB = sortedTasks.map(task => ({ ...task, deadline: task.deadline.toISOString() }));
+        setTasks(tasksDB);
       } catch (error) {
         console.log('Failed to fetch tasks:', error);
         setTasks([]);

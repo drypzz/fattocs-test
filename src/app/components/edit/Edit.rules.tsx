@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
-import { Task } from '@/app/types/Task'; // Importa o tipo de tarefa
-
-import prisma from '@/lib/prisma'; // Importa a instância do Prisma
+import { updateTaskPrisma, getTasksPrisma } from '@/lib/actions';
 
 import EditTaskProps from './Edit.props'; // Importa a interface de propriedades da edição
 
@@ -39,27 +37,25 @@ const EditRules = ({ task, onSave }: EditTaskProps) => {
 
         try {
 
+            const tasks = await getTasksPrisma(); // Obtém as tarefas do banco de dados
 
-            const tasks = await prisma.task.findMany(); // Busca todas as tarefas
-
-            if (tasks.some(existingTask => existingTask.name === name && existingTask.id !== task.id)) {
-                alert("Nome de tarefa já existe!");
+            if (tasks.some(t => t.name === name && t.id !== task.id)) {
+                alert('Já existe uma tarefa com esse nome');
                 return;
             } // Verifica se já existe uma tarefa com o mesmo nome
 
-            const updatedTask = { ...task, name, cost, deadline }; // Atualiza a tarefa com os novos valores
-            const response = await prisma.task.update({
-                where: { id: updatedTask.id },
-                data: updatedTask,
-            }).then((e) => {
+            const updatedTask = { ...task, name, cost, deadline: new Date(deadline) }; // Atualiza a tarefa com os novos valores
+
+            const response = await updateTaskPrisma(task.id, updatedTask).then((e) => {
                 console.log(e);
                 setName('');
                 setCost(0);
                 setDeadline('');
-                onSave(updatedTask);
+                onSave({...task, name, cost, deadline: new Date(deadline).toISOString()});
             }).catch((e) => {
                 console.log(e);
             });
+
         } catch (error) {
             console.log("Failed to edit task:", error);
         }
